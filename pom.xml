@@ -1,0 +1,92 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>testtest</groupId>
+    <artifactId>testtest</artifactId>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+
+    <name>A custom Machine Config Bundle</name>
+    
+    <repositories>
+        <repository>
+            <id>my</id>
+            <url>https://db.92.com/nexus/content/repositories/wf-archetypes-releases/content/</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <project.build.javaVersion>1.8</project.build.javaVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <workfusion.version>9.2.0.0</workfusion.version>
+        <mcb.repo.url>https://db.92.com/nexus/content/repositories/wf-archetypes-releases/</mcb.repo.url>
+    </properties>
+
+
+    <distributionManagement>
+        <repository>
+            <!-- If need, specify repository access credentials in your maven 
+                configuration file 'setting.xml'. Manual: http://maven.apache.org/plugins/maven-deploy-plugin/usage.html -->
+            <id>mcb-repo</id>
+            <url>${mcb.repo.url}</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <artifactId>workfusion-application</artifactId>
+                <groupId>com.freedomoss.crowdcontrol</groupId>
+                <version>${workfusion.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>${build.sourceDirectory}</directory>
+                <includes>
+                    <include>**/*.groovy</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>${project.build.javaVersion}</source>
+                    <target>${project.build.javaVersion}</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>

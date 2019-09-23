@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://web-harvest.sourceforge.net/schema/1.0/config" scriptlang="groovy">
+
+    <export include-original-data="true"></export>
+    
+<s3 bucket="secdocs">
+<var-def name="file_s3_location">
+<s3-list />
+</var-def>
+</s3>
+
+<script><![CDATA[
+items_for_export = new ArrayList();
+count = 0;
+println "==================S3 FILE LIST=========================="
+println  file_s3_location
+println "========================================================"
+]]></script>
+
+</config>
